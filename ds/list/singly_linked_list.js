@@ -1,4 +1,6 @@
 var Node = require('../node/node');
+var ListIterator = require('./list_iterator');
+
 function List(){
   this.head = new Node();
   this.last = this.head;
@@ -46,18 +48,6 @@ List.prototype.remove = function(index){
   prev.next = remove.next;
   this.length--;
   return remove.data;
-}
-
-function ListIterator(head){
-  this.it = head.next;
-}
-ListIterator.prototype.hasNext = function(){
-  return this.it !== null;
-}
-ListIterator.prototype.next = function(){
-  var next = this.it;
-  this.it = next.next;
-  return next.data;
 }
 
 function at(list, index){
