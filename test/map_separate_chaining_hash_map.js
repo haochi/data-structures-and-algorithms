@@ -31,6 +31,13 @@ describe('Map', function(){
       assert.equal(1, map.size());
     });
   });
+
+  describe("#put", function(){
+    it("should update hello's value to 10", function(){
+      map.put("hello", 10);
+      assert.equal(10, map.get("hello"));
+    });
+  });
 /*
   describe("#iterator()", function(){
     it("shouldn't throw an exception", function(){

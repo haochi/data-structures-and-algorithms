@@ -13,13 +13,20 @@ function Map(buckets_size, hash){
 }
 
 Map.prototype.put = function(key, value){
-  var entry = new Entry();
   var index = this.hash(key) % this.buckets_size;
-  entry.key = key;
-  entry.value = value;
-
   var bucket = this.buckets.get(index);
-  bucket.append(entry);
+  var entry_index = indexOfInBucket(bucket, key);
+  var entry;
+
+  if(entry_index >= 0){
+    entry = bucket.get(entry_index);
+    entry.value = value;
+  }else{
+    entry = new Entry();
+    entry.key = key;
+    entry.value = value;
+    bucket.append(entry);
+  }
 
   this.length++;
 }
@@ -42,7 +49,7 @@ Map.prototype.remove = function(key){
   var entry;
   var index = this.hash(key) % this.buckets_size;
   var bucket = this.buckets.get(index);
-  var entry_index = indexOfInBucket(this, key);
+  var entry_index = indexOfInBucket(bucket, key);
 
   if(entry_index !== -1){
     entry = bucket.remove(entry_index);
@@ -54,7 +61,14 @@ Map.prototype.remove = function(key){
 }
 
 Map.prototype.contains = function(key){
-  return indexOfInBucket(this, key) !== -1;
+  var bucket;
+  for(var i=0; i<this.buckets_size; i++){
+    bucket = this.buckets.get(i);
+    if(indexOfInBucket(bucket, key) !== -1){
+      return true;
+    }
+  }
+  return false;
 }
 
 Map.prototype.size = function(){
@@ -88,11 +102,8 @@ MapIterator.prototype.next = function(){
   return entry;
 }
 
-function indexOfInBucket(map, key){
+function indexOfInBucket(bucket, key){
   var entry;
-  var index = map.hash(key) % map.buckets_size;
-  var bucket = map.buckets.get(index);
-
   for(var it=bucket.iterator(), it_index=0; it.hasNext(); it_index++){
     entry = it.next();
     if(entry.key === key){
