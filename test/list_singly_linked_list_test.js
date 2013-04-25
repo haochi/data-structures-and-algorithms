@@ -16,10 +16,6 @@ describe('List', function(){
     it('should return 4', function(){
       assert.equal(4, list.size());
     });
-    it('should return 3', function(){
-      list.remove(1);
-      assert.equal(3, list.size());
-    });
   });
 
   describe('#get()', function(){
@@ -31,6 +27,7 @@ describe('List', function(){
   describe('#remove()', function(){
     it('should return 3', function(){
       list.remove(1);
+      assert.equal(3, list.size());
       assert.equal(3, list.get(1));
     });
   });
