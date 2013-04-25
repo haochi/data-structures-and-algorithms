@@ -26,9 +26,8 @@ Map.prototype.put = function(key, value){
     entry.key = key;
     entry.value = value;
     bucket.append(entry);
+    this.length++;
   }
-
-  this.length++;
 }
 
 Map.prototype.get = function(key){
