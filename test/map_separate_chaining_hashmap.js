@@ -1,4 +1,4 @@
-var Map = require('../ds/map/separate_chaining_hash_map');
+var Map = require('../ds/map/separate_chaining_hashmap');
 var assert = require("assert");
 
 describe('Map', function(){
