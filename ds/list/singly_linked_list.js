@@ -6,6 +6,7 @@ function List(){
   this.tail = this.head;
   this.length = 0;
 }
+
 List.prototype.is_empty = function(){
   return this.size === 0;
 }
@@ -27,7 +28,7 @@ List.prototype.dequeue = function(){
 }
 
 List.prototype.pop = function(){
-  return this.remove(this.size()-1);
+  return this.remove(this.length-1);
 }
 
 List.prototype.prepend = function(data){
