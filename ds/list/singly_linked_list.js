@@ -3,7 +3,7 @@ var ListIterator = require('./list_iterator');
 
 function List(){
   this.head = new Node();
-  this.last = this.head;
+  this.tail = this.head;
   this.length = 0;
 }
 List.prototype.is_empty = function(){
@@ -17,8 +17,8 @@ List.prototype.size = function(){
 List.prototype.append = List.prototype.push = function(data){
   var node = new Node();
   node.data = data;
-  this.last.next = node;
-  this.last = node;
+  this.tail.next = node;
+  this.tail = node;
   this.length += 1;
 }
 
