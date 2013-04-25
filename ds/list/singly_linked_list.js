@@ -14,12 +14,16 @@ List.prototype.size = function(){
   return this.length;
 }
 
-List.prototype.append = List.prototype.push = function(data){
+List.prototype.append = List.prototype.push = List.prototype.enqueue = function(data){
   var node = new Node();
   node.data = data;
   this.tail.next = node;
   this.tail = node;
   this.length += 1;
+}
+
+List.prototype.dequeue = function(){
+  return this.remove(0);
 }
 
 List.prototype.pop = function(){

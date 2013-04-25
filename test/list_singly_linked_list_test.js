@@ -32,6 +32,12 @@ describe('List', function(){
     });
   });
 
+  describe('#dequeue()', function(){
+    it('should return 1', function(){
+      assert.equal(1, list.dequeue(1));
+    });
+  });
+
   describe('#pop', function(){
     it('should return 4', function(){
       assert.equal(4, list.pop());
